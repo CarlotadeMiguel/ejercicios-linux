@@ -11,6 +11,7 @@ A continuación, se presentan algunos comandos básicos de Linux:
 - `touch [archivo]`: Crea un archivo vacío.
 - `cp [origen] [destino]`: Copia archivos o directorios.
 - `mv [origen] [destino]`: Mueve o renombra archivos o directorios.
+    sudo mv index.html /var/www/HTML/
 - `rm [archivo]`: Elimina un archivo.
 - `mkdir [directorio]`: Crea un nuevo directorio.
 - `rmdir [directorio]`: Elimina un directorio vacío.
@@ -23,6 +24,7 @@ A continuación, se presentan algunos comandos básicos de Linux:
 
 ## Comandos de Permisos
 - `chmod [permisos] [archivo]`: Cambia los permisos de un archivo.
+    `chmod - R [permisos] [archivo]`:  Indica que el comando debe aplicarse de manera recursiva, es decir, a todos los archivos y subdirectorios dentro del directorio especificado.
 - `chown [usuario] [archivo]`: Cambia el propietario de un archivo.
 
 ## Comandos de Procesos
@@ -39,6 +41,8 @@ A continuación, se presentan algunos comandos básicos de Linux:
 - `man [comando]`: Muestra el manual de un comando.
 - `history`: Muestra el historial de comandos.
 - `clear`: Limpia la terminal.
+
+
 
 
 ## Comando `read`
@@ -59,7 +63,7 @@ El comando `read` se utiliza para leer una línea de entrada desde el usuario o 
 2. Leer múltiples valores:
     ```bash
     echo "Introduce tu nombre y edad:"
-    read nombre edad
+    read -p  "Introduce tu nombre y edad:" nombre edad
     echo "Nombre: $nombre, Edad: $edad"
     ```
 
@@ -75,4 +79,25 @@ El comando `read` se utiliza para leer una línea de entrada desde el usuario o 
 - `-s`: Oculta la entrada (útil para contraseñas).
 - `-t`: Establece un tiempo de espera para la entrada.
 
-El comando `read` es muy útil para interactuar con el usuario o procesar datos en scripts.
+
+## Comando scp
+El comando scp (Secure Copy) se utiliza para copiar archivos de forma segura entre máquinas en una red. Es similar al comando cp, pero funciona sobre SSH, lo que significa que los archivos se transfieren cifrados.
+
+### Sintaxis
+`scp [opciones] [[usuario@]host1:]ruta1 [[usuario@]host2:]ruta2`
+
+- [usuario@]host1:: Especifica el usuario y el host de origen.
+- ruta1: Especifica la ruta al archivo o directorio que se copiará.
+- [usuario@]host2:: Especifica el usuario y el host de destino.
+- ruta2: Especifica la ruta donde se guardará el archivo o directorio.
+
+`scp -r /ruta/local/directorio usuario@host_remoto:/ruta/remota`
+
+### Opciones comunes
+- `-i`: Especifica una clave privada para la autenticación.
+- `-r`: Copia directorios de forma recursiva.
+    `scp -i ~/[rutaDelaclave] -r * [user]@[ip]:[rutaDondeCopiarasLosArchivos]`
+    `scp -i ~/Downloads/labuser.pem -r * ec2-user@ip:/home/ec2-user/`
+- `-P`: Especifica un puerto diferente al predeterminado.
+- `-v`: Muestra información detallada sobre la transferencia (modo verbose).
+
